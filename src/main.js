@@ -1,16 +1,13 @@
-// import 'babel-polyfill'
-// import Vue from 'vue'
+import 'babel-polyfill'
 import Vue from 'vue/dist/vue.esm.js'
 import App from './App.vue'
 import router from './router'
 
 // 引入element组件库
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import '../static/styles/naiba.scss'
 
 Vue.use(ElementUI);
-
-// import '../static/styles/home.css';
 
 new Vue({
     el: '#app',
