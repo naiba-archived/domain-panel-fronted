@@ -9,72 +9,77 @@ body {
 }
 
 //价格卡片
-.plan-card {
-    background-color: #32AAD1;
-    color: white;
-    text-align: center;
-    .el-card__header {
-        font-size: 20px;
-        background-color: #1A95BD;
-        border-bottom: none;
-    }
-    .el-card__body {
-        p {
-            margin: 12px 0 12px 0;
-            padding: 12px 24px 12px 24px;
-        }
-        .price {
-            color: #eee;
-            font-size: 22px;
-            font-weight: bold;
-            .value {
-                font-size: 40px;
-                margin: 0 4px;
-                color: #fff;
-            }
-        }
-        .promotion {
-            margin: 3px 0 6px;
+.plan-cards {
+    .el-col {
+        height: 100%;
+        .plan-card {
+            height: 100%;
+            background-color: #32AAD1;
+            color: white;
             text-align: center;
-            .money {
-                text-decoration: line-through;
+            .el-card__header {
                 font-size: 20px;
+                background-color: #1A95BD;
+                border-bottom: none;
             }
-            .discount {
-                margin-left: 8px;
-                display: inline-block;
-                background: #ed4343;
-                color: #fff;
-                border-radius: 4px;
-                font-size: 12px;
-                padding: 2px 6px;
-                font-weight: bold;
-                vertical-align: top;
-                line-height: 20px;
-                margin-top: 4px;
+            .el-card__body {
+                p {
+                    margin: 12px 0 12px 0;
+                    padding: 12px 24px 12px 24px;
+                }
+                .price {
+                    color: #eee;
+                    font-size: 22px;
+                    font-weight: bold;
+                    .value {
+                        font-size: 40px;
+                        margin: 0 4px;
+                        color: #fff;
+                    }
+                }
+                .promotion {
+                    margin: 3px 0 6px;
+                    text-align: center;
+                    .money {
+                        text-decoration: line-through;
+                        font-size: 20px;
+                    }
+                    .discount {
+                        margin-left: 8px;
+                        display: inline-block;
+                        background: #ed4343;
+                        color: #fff;
+                        border-radius: 4px;
+                        font-size: 12px;
+                        padding: 2px 6px;
+                        font-weight: bold;
+                        vertical-align: top;
+                        line-height: 20px;
+                        margin-top: 4px;
+                    }
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 0 10px 0;
+                    border-radius: 4px;
+                    font-weight: 700;
+                    background-color: transparent;
+                    text-decoration: none;
+                    width: 100%;
+                    color: #fff;
+                    margin-top: 24px;
+                    border: 2px solid rgba(255, 255, 255, 0.7);
+                }
             }
         }
-        .button {
-            display: inline-block;
-            padding: 10px 0 10px 0;
-            border-radius: 4px;
-            font-weight: 700;
-            background-color: transparent;
-            text-decoration: none;
-            width: 100%;
-            color: #fff;
-            margin-top: 24px;
-            border: 2px solid rgba(255, 255, 255, 0.7);
+        .plan-gold {
+            @media (max-width: 768px) {
+                margin-top:10px;
+            }
+            background-color: #DB802E;
+            .el-card__header {
+                background-color: #C76C1C;
+            }
         }
-    }
-}
-
-.plan-gold {
-    @media (max-width:768px) {
-        margin-top:10px;
-    }
-    background-color: #DB802E;
-    .el-card__header {
-        background-color: #C76C1C;
     }
 }

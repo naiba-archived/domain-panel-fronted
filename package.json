@@ -16,14 +16,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "components": "^0.1.0",
     "element-ui": "^2.4.6",
     "reset-css": "^4.0.1",
-    "vue": "^2.5.17",
+    "vue": "^2.0.0",
     "vue-hot-reload-api": "^2.3.0",
     "vue-recaptcha": "^1.1.1",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^2.0.0 || ^3.0.0",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.2.0",

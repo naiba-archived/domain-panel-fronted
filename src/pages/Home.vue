@@ -6,7 +6,7 @@
       </el-carousel-item>
     </el-carousel>
     <el-main>
-      <el-row :gutter="10">
+      <el-row :gutter="10" class="plan-cards">
         <el-col :sm="{span:8,offset:4}">
           <el-card class="plan-card" shadow="hover" header="月付计划">
             <p>一个真正的投资者并不会如赌博般随意投放资金，他只会投放于有足够可能性获取利润的工具上。</p>
@@ -23,7 +23,7 @@
         </el-col>
         <el-col :sm="8">
           <el-card class="plan-card plan-gold" shadow="hover" header="年付计划">
-            <p>人们习惯把每天短线进出股市的投机客称之为投资人，就好像大家把不断发生一夜情的爱情骗子当成浪漫情人一样。</p>
+            <p>人们习惯把短线进出股市的投机客称为投资人，就像大家把不断发生一夜情的骗子当成浪漫情人一样。</p>
             <div class="price">￥
               <span class="value">98</span>
               <span>每年</span>
@@ -41,6 +41,7 @@
       <div class="payinfo">
         <strong>转账备注填写注册邮箱</strong>
         <br>
+        <br>
         <img width="100%" src="../../static/images/pay.png">
       </div>
       <span slot="footer" class="dialog-footer">
@@ -51,10 +52,7 @@
 </template>
 
 <script>
-import { Pay } from "../components/Pay.vue";
-
 export default {
-  components: { Pay },
   data: () => {
     return {
       payInfoVisible: false,
@@ -76,6 +74,9 @@ export default {
       display: inline-block;
       vertical-align: middle;
       line-height: normal;
+      @media (max-width: 768px) {
+        font-size: 50px;
+      }
     }
   }
 }

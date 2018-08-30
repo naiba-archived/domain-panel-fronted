@@ -1,17 +1,19 @@
 import 'babel-polyfill'
 import Vue from 'vue/dist/vue.esm.js'
-import App from './App.vue'
+import store from './store'
 import router from './router'
+import api from './api'
 
-// 引入element组件库
+import App from './App.vue'
 import ElementUI from 'element-ui'
 import '../static/styles/naiba.scss'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI)
+Vue.use(api)
 
 new Vue({
     el: '#app',
     router,
-    template: "<App/>",
-    components: { App }
+    store,
+    render: h => h(App)
 })
