@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  data: () => {
+  data() {
     return {
       payInfoVisible: false,
       carousel_text: ["专业域名停放", "省心资产管理", "高端投资交流"]

@@ -150,7 +150,7 @@ export default {
   methods: {
     sendVerify(what) {
       if (this.form.mail.length < 6) {
-        this.$message.warning("请填写正确的邮箱");
+        this.$message.info("请填写正确的邮箱");
         return;
       }
       this.form.type = what;
@@ -224,6 +224,10 @@ export default {
             .then(function(response) {
               nb.$message.success(msg + "成功！");
               nb.$store.commit("SET_USER", response.data);
+              //初始化米表列表
+              nb.$http.get("panels").then(function(resp) {
+                nb.$store.commit("INIT_PANELS", resp.data);
+              });
               nb.$router.push("/");
             })
             .catch(function(error) {

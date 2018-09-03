@@ -6,6 +6,16 @@ import store from "../store"
 
 import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
+//Dashboard
+import Dashboard from '../pages/dashboard/Dashboard.vue'
+import DashIndex from '../pages/dashboard/Index.vue'
+import NewPanel from '../pages/dashboard/NewPanel.vue'
+import Settings from '../pages/dashboard/Settings.vue'
+//Panel
+import Panel from '../pages/panel/Panel.vue'
+import PanelIndex from '../pages/panel/Index.vue'
+import PSettings from '../pages/panel/Settings.vue'
+
 
 Vue.use(Router)
 
@@ -27,6 +37,58 @@ const router = new Router({
         requireGuest: true,
         title: "平台登录",
       },
+    },
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      children: [
+        {
+          path: '',
+          component: DashIndex,
+          meta: {
+            requireLogin: true,
+            title: "管理面板",
+          },
+        },
+        {
+          path: 'new-panel',
+          component: NewPanel,
+          meta: {
+            requireLogin: true,
+            title: "新建米表",
+          },
+        },
+        {
+          path: 'settings',
+          component: Settings,
+          meta: {
+            requireLogin: true,
+            title: "个人设置",
+          },
+        },
+      ]
+    },
+    {
+      path: '/panel/:id/',
+      component: Panel,
+      children: [
+        {
+          path: '',
+          component: PanelIndex,
+          meta: {
+            requireLogin: true,
+            title: "- 米表管理",
+          },
+        },
+        {
+          path: 'settings',
+          component: PSettings,
+          meta: {
+            requireLogin: true,
+            title: "- 米表设置",
+          },
+        },
+      ]
     }
   ]
 })
@@ -34,7 +96,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // 页面标题
   if (to.meta.title && to.meta.title.length > 0) {
-    document.title = to.meta.title + " - 润措域名资产管理平台 runcuo.com"
+    document.title = to.meta.title + " - 润措资产管理 runcuo.com"
   } else {
     document.title = "润措域名资产管理平台 runcuo.com"
   }
