@@ -52,7 +52,7 @@ Axios.interceptors.response.use(
         }
         // 需要重新登录
         if (error.response.status === 401) {
-            store.commit('removeUser')
+            store.commit('CLEAR')
             // 若是接口访问的时候没有发现有鉴权的基础信息,直接返回登录页
             router.push({
                 path: "/login"

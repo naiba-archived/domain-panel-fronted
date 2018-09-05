@@ -13,7 +13,8 @@ import NewPanel from '../pages/dashboard/NewPanel.vue'
 import Settings from '../pages/dashboard/Settings.vue'
 //Panel
 import Panel from '../pages/panel/Panel.vue'
-import PanelIndex from '../pages/panel/Index.vue'
+import PIndex from '../pages/panel/Index.vue'
+import PCats from '../pages/panel/Cats.vue'
 import PSettings from '../pages/panel/Settings.vue'
 
 
@@ -74,7 +75,7 @@ const router = new Router({
       children: [
         {
           path: '',
-          component: PanelIndex,
+          component: PIndex,
           meta: {
             requireLogin: true,
             title: "- 米表管理",
@@ -86,6 +87,14 @@ const router = new Router({
           meta: {
             requireLogin: true,
             title: "- 米表设置",
+          },
+        },
+        {
+          path: 'cats',
+          component: PCats,
+          meta: {
+            requireLogin: true,
+            title: "- 分类管理",
           },
         },
       ]

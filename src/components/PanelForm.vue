@@ -1,45 +1,45 @@
 <template>
-    <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
-        <el-form-item label="标题·中" prop="name_cn">
-            <el-input v-model="form.name_cn" placeholder="润措域名资产管理平台"></el-input>
-        </el-form-item>
-        <el-form-item label="标题·英" prop="name_en">
-            <el-input v-model="form.name_en" placeholder="Runcuo Domains Management"></el-input>
-        </el-form-item>
-        <el-form-item label="域名" prop="domain">
-            <el-input v-model="form.domain" placeholder="runcuo.com"></el-input>
-        </el-form-item>
-        <el-form-item label="简介·中" prop="desc_cn">
-            <el-input type="textarea" :rows="3" v-model="form.desc_cn" placeholder="润措域名资产管理平台（runcuo.com）是由资深域名投资人奶爸创建，前身是09年上线的知名域名平台泡名网，后因业务整合，于2013年9月1号将泡名网业务全部转移到润措域名资产管理平台（runcuo.com）上。"></el-input>
-        </el-form-item>
-        <el-form-item label="简介·英" prop="desc_en">
-            <el-input type="textarea" :rows="3" v-model="form.desc_en" placeholder="Runcuo.com is created by a senior domain name investor, Naiba, who was formerly known as the well-known domain name platform in 2009. It will be bubble-named on September 1, 2013 due to business integration. All of the business was transferred to Runcheo's domain name asset management platform (runcuo.com)."></el-input>
-        </el-form-item>
-        <el-form-item v-if="isEdit">
-            <img style="max-width:192px;max-height:48px" :src="'http://localhost:8080/upload/logo/'+panel.ID+'-logo.png'">
-        </el-form-item>
-        <el-form-item label="Logo·中" prop="logo_cn">
-            <el-input id="logo_cn" type="file" accept="image/png" v-model="form.logo_cn"></el-input>
-        </el-form-item>
-        <el-form-item v-if="isEdit">
-            <img style="max-width:192px;max-height:48px" :src="'http://localhost:8080/upload/logo/'+panel.ID+'-logo_en.png'">
-        </el-form-item>
-        <el-form-item label="Logo·英" prop="logo_en">
-            <el-input id="logo_en" type="file" accept="image/png" v-model="form.logo_en"></el-input>
-        </el-form-item>
-        <el-form-item label="谷歌统计" prop="ga">
-            <el-input v-model="form.ga" placeholder="XN-XXXXXXX"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <el-alert title="请将米表域名cname到 parking.runcuo.com." type="success" :closable="false">
-            </el-alert>
-        </el-form-item>
-        <el-form-item>
-            <el-button @click="onSubmit" type="primary">{{isEdit?"确认修改":"新建米表"}}</el-button>
-            <el-button @click="reset">重置</el-button>
-            <el-button v-if="isEdit" type="danger" @click="onDelete">删除</el-button>
-        </el-form-item>
-    </el-form>
+  <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
+    <el-form-item label="标题·中" prop="name_cn">
+      <el-input v-model="form.name_cn" placeholder="润措域名资产管理平台"></el-input>
+    </el-form-item>
+    <el-form-item label="标题·英" prop="name_en">
+      <el-input v-model="form.name_en" placeholder="Runcuo Domains Management"></el-input>
+    </el-form-item>
+    <el-form-item label="域名" prop="domain">
+      <el-input v-model="form.domain" placeholder="runcuo.com"></el-input>
+    </el-form-item>
+    <el-form-item label="简介·中" prop="desc_cn">
+      <el-input type="textarea" :rows="3" v-model="form.desc_cn" placeholder="润措域名资产管理平台（runcuo.com）是由资深域名投资人奶爸创建，前身是09年上线的知名域名平台泡名网，后因业务整合，于2013年9月1号将泡名网业务全部转移到润措域名资产管理平台（runcuo.com）上。"></el-input>
+    </el-form-item>
+    <el-form-item label="简介·英" prop="desc_en">
+      <el-input type="textarea" :rows="3" v-model="form.desc_en" placeholder="Runcuo.com is created by a senior domain name investor, Naiba, who was formerly known as the well-known domain name platform in 2009. It will be bubble-named on September 1, 2013 due to business integration. All of the business was transferred to Runcheo's domain name asset management platform (runcuo.com)."></el-input>
+    </el-form-item>
+    <el-form-item v-if="isEdit">
+      <img style="max-width:192px;max-height:48px" :src="'/upload/logo/'+panel.ID+'-logo.png'">
+    </el-form-item>
+    <el-form-item label="Logo·中" prop="logo_cn">
+      <el-input id="logo_cn" type="file" accept="image/png" v-model="form.logo_cn"></el-input>
+    </el-form-item>
+    <el-form-item v-if="isEdit">
+      <img style="max-width:192px;max-height:48px" :src="'/upload/logo/'+panel.ID+'-logo_en.png'">
+    </el-form-item>
+    <el-form-item label="Logo·英" prop="logo_en">
+      <el-input id="logo_en" type="file" accept="image/png" v-model="form.logo_en"></el-input>
+    </el-form-item>
+    <el-form-item label="谷歌统计" prop="ga">
+      <el-input v-model="form.ga" placeholder="XN-XXXXXXX"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-alert title="请将米表域名cname到 parking.runcuo.com." type="success" :closable="false">
+      </el-alert>
+    </el-form-item>
+    <el-form-item>
+      <el-button @click="onSubmit" type="primary">{{isEdit?"确认修改":"新建米表"}}</el-button>
+      <el-button @click="reset">重置</el-button>
+      <el-button v-if="isEdit" type="danger" @click="onDelete">删除</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
@@ -51,8 +51,12 @@ export default {
   data() {
     var confimDomain = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请再次输入密码"));
-      } else if (!value.match("^[a-zA-Z0-9-]{1,63}(?:.[a-zA-Z]{2,})+$")) {
+        callback(new Error("请输入域名"));
+      } else if (
+        !value.match(
+          /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/
+        )
+      ) {
         callback(new Error("域名格式不规范"));
       } else {
         callback();
