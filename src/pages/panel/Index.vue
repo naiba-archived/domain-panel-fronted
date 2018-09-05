@@ -124,7 +124,7 @@ export default {
         return val.ID == catID;
       });
       if(c){
-        return [prop];
+        return c[prop];
       }
       return undefined;
     },
