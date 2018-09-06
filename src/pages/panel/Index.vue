@@ -47,6 +47,10 @@
               </el-select>
             </el-form-item>
             <el-form-item>
+              <el-alert title="请将米表域名cname到 parking.riluo.cn." type="success" :closable="false">
+              </el-alert>
+            </el-form-item>
+            <el-form-item>
               <el-button @click="onSubmit" type="primary">{{form.ID?"修改":"添加"}}</el-button>
               <el-button @click="reset">重置</el-button>
             </el-form-item>
@@ -123,7 +127,7 @@ export default {
       var c = this.cats.find(function(val, ind) {
         return val.ID == catID;
       });
-      if(c){
+      if (c) {
         return c[prop];
       }
       return undefined;
