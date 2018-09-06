@@ -22,6 +22,7 @@
     "element-ui": "^2.4.6",
     "reset-css": "^4.0.1",
     "vue": "^2.0.0",
+    "vue-analytics": "^5.16.0",
     "vue-hot-reload-api": "^2.3.0",
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
