@@ -3,7 +3,7 @@
     <el-col :sm="{span:20,offset:2}">
       <el-row>
         <el-col :span="15">
-          <img @click="goto('/')" height="48px" src="https://www.riluo.cn/static/offical/logo.png">
+          <img @click="goto('/')" height="48px" src="https://www.riluo.cn/static/offical/images/logo.png">
         </el-col>
         <el-col :span="8" class="navbar-right">
           <el-button v-if="!user" @click="goto('login')" type="primary" plain icon="el-icon-edit-outline">登录</el-button>
