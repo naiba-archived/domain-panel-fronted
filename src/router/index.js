@@ -105,9 +105,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // 页面标题
   if (to.meta.title && to.meta.title.length > 0) {
-    document.title = to.meta.title + " - 润措资产管理 runcuo.com"
+    document.title = to.meta.title + " - 日落资产管理 riluo.cn"
   } else {
-    document.title = "润措域名资产管理平台 runcuo.com"
+    document.title = "日落域名资产管理平台 riluo.cn"
   }
 
   if (to.matched.some(res => res.meta.requireLogin || res.meta.requireAdmin || res.meta.requireGuest)) {

@@ -4,7 +4,7 @@ import store from "../store"
 import { Message } from 'element-ui';
 
 const Axios = axios.create({
-    baseURL: process.env.NODE_ENV == "production" ? 'https://www.runcuo.com/api/' : 'http://localhost:8080/api/',
+    baseURL: process.env.NODE_ENV == "production" ? 'https://www.riluo.cn/api/' : 'http://localhost:8080/api/',
     timeout: 30000,
     //responseType: "json",
     //withCredentials: true, // 是否允许带cookie这些

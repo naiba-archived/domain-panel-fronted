@@ -3,7 +3,7 @@
     <el-col :sm="{span:20,offset:2}" style="padding:20px">
       <el-form ref="form" :rules="rules" :model="form" label-width="80px">
         <el-form-item label="昵称" prop="Name">
-          <el-input v-model="form.Name" placeholder="润措"></el-input>
+          <el-input v-model="form.Name" placeholder="日落"></el-input>
         </el-form-item>
         <el-form-item label="手机" prop="Phone">
           <el-input v-model="form.Phone" placeholder="18888888888"></el-input>

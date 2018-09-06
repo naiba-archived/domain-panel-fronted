@@ -35,10 +35,10 @@
         <el-tab-pane :label="form.ID?'修改域名':'添加域名'" name="edit">
           <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
             <el-form-item label="域名" prop="Domain">
-              <el-input v-model="form.Domain" placeholder="RunCuo.com"></el-input>
+              <el-input v-model="form.Domain" placeholder="RiLuo.cn"></el-input>
             </el-form-item>
             <el-form-item label="简介" prop="Desc">
-              <el-input v-model="form.Desc" placeholder="润措资产管理"></el-input>
+              <el-input v-model="form.Desc" placeholder="日落资产管理"></el-input>
             </el-form-item>
             <el-form-item label="分类" prop="CatID">
               <el-select v-model="form.CatID" placeholder="请选择">

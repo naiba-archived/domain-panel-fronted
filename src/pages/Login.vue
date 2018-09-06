@@ -35,7 +35,7 @@
               <el-input v-model="form.verify" placeholder="可能在垃圾箱哦"></el-input>
             </el-form-item>
             <el-form-item label="昵称" prop="name">
-              <el-input v-model="form.name" placeholder="润措"></el-input>
+              <el-input v-model="form.name" placeholder="日落"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
               <el-input type="password" v-model="form.password"></el-input>
