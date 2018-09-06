@@ -5,7 +5,7 @@ import { Message } from 'element-ui';
 
 const Axios = axios.create({
     baseURL: process.env.NODE_ENV == "production" ? 'https://www.riluo.cn/api/' : 'http://localhost:8080/api/',
-    timeout: 30000,
+    timeout: 60000,
     //responseType: "json",
     //withCredentials: true, // 是否允许带cookie这些
     headers: {
