@@ -7,11 +7,9 @@ import VueAnalytics from 'vue-analytics'
 
 import App from './App.vue'
 import ElementUI from 'element-ui'
-import Scrollbar from "element-ui/packages/scrollbar";
 import '../static/styles/naiba.scss'
 
 Vue.use(ElementUI)
-Vue.use(Scrollbar)
 Vue.use(api)
 Vue.use(VueAnalytics, {
     id: 'UA-111315498-13',
