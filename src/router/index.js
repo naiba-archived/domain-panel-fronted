@@ -10,6 +10,7 @@ import Login from '../pages/Login.vue'
 import Dashboard from '../pages/dashboard/Dashboard.vue'
 import DashIndex from '../pages/dashboard/Index.vue'
 import NewPanel from '../pages/dashboard/NewPanel.vue'
+import Offers from '../pages/dashboard/Offers.vue'
 import Settings from '../pages/dashboard/Settings.vue'
 //Panel
 import Panel from '../pages/panel/Panel.vue'
@@ -57,6 +58,14 @@ const router = new Router({
           meta: {
             requireLogin: true,
             title: "新建米表",
+          },
+        },
+        {
+          path: 'offers',
+          component: Offers,
+          meta: {
+            requireLogin: true,
+            title: "报价列表",
           },
         },
         {

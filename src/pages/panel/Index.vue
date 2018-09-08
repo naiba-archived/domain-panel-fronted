@@ -14,9 +14,9 @@
                 {{ scope.row.Domain }}
               </template>
             </el-table-column>
-            <el-table-column label="分类" width="180" prop="cat" sortable>
+            <el-table-column label="分类" width="180" :filters="catsTags" :filter-method="filterTag" filter-placement="bottom-end">
               <template slot-scope="scope">
-                {{ cat(scope.row.CatID,'Name') }}
+                <el-tag :type="scope.$index % 2 == 0 ? 'primary' : 'success'" disable-transitions>{{cat(scope.row.CatID,'Name')}}</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="简介" width="180">
@@ -84,6 +84,7 @@ export default {
         Desc: ""
       },
       cats: [],
+      catsTags: [],
       domains: [],
       rules: {
         Domain: [{ validator: confimDomain, required: true }],
@@ -118,11 +119,20 @@ export default {
       .then(
         axios.spread((domainRes, catRes) => {
           nb.cats = catRes.data;
+          nb.cats.forEach(cat => {
+            nb.catsTags.push({
+              text: cat.Name,
+              value: cat.ID
+            });
+          });
           nb.domains = domainRes.data;
         })
       );
   },
   methods: {
+    filterTag(value, row) {
+      return row.CatID === value;
+    },
     cat(catID, prop) {
       var c = this.cats.find(function(val, ind) {
         return val.ID == catID;
