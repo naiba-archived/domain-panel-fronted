@@ -3,20 +3,25 @@
     <el-col :sm="{span:20,offset:2}" style="padding:20px">
       <el-tabs :value="activeTab" type="border-card" @tab-click="handleTabClick">
         <el-tab-pane label="域名列表" name="list">
-          <el-table :stripe="true" :data="domains" :default-sort="{prop: 'cat', order: 'descending'}">
-            <el-table-column label="#" width="180">
+          <el-table :stripe="true" :data="domains" :default-sort="{prop: 'cat', order: 'descending'}" show-summary>
+            <el-table-column label="#">
               <template slot-scope="scope">
                 {{ scope.row.ID }}
               </template>
             </el-table-column>
-            <el-table-column label="域名" width="180">
+            <el-table-column label="域名">
               <template slot-scope="scope">
                 {{ scope.row.Domain }}
               </template>
             </el-table-column>
-            <el-table-column label="分类" width="180" :filters="catsTags" :filter-method="filterTag" filter-placement="bottom-end">
+            <el-table-column label="分类" :filters="catsTags" :filter-method="filterTag" filter-placement="bottom-end">
               <template slot-scope="scope">
                 <el-tag :type="scope.$index % 2 == 0 ? 'primary' : 'success'" disable-transitions>{{cat(scope.row.CatID,'Name')}}</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column label="到期时间" width="180" prop="Expire" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.Expire }}
               </template>
             </el-table-column>
             <el-table-column label="简介" width="180">
@@ -24,10 +29,35 @@
                 {{ scope.row.Desc }}
               </template>
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="170">
               <template slot-scope="scope">
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+            <el-table-column label="续费成本" prop="Renew">
+              <template slot-scope="scope">
+                {{ scope.row.Renew }}
+              </template>
+            </el-table-column>
+            <el-table-column label="购入成本" prop="Cost">
+              <template slot-scope="scope">
+                {{ scope.row.Cost }}
+              </template>
+            </el-table-column>
+            <el-table-column label="注册商" width="200">
+              <template slot-scope="scope">
+                {{ scope.row.Registrar }}
+              </template>
+            </el-table-column>
+            <el-table-column label="注册时间" width="180" prop="Create" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.Create }}
+              </template>
+            </el-table-column>
+            <el-table-column label="购入时间" width="180" prop="Buy" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.Buy }}
               </template>
             </el-table-column>
           </el-table>
@@ -35,7 +65,7 @@
         <el-tab-pane :label="form.ID?'修改域名':'添加域名'" name="edit">
           <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
             <el-form-item label="域名" prop="Domain">
-              <el-input v-model="form.Domain" placeholder="RiLuo.cn"></el-input>
+              <el-input @blur="domainFetch" v-model="form.Domain" placeholder="RiLuo.cn"></el-input>
             </el-form-item>
             <el-form-item label="简介" prop="Desc">
               <el-input v-model="form.Desc" placeholder="日落资产管理"></el-input>
@@ -45,6 +75,27 @@
                 <el-option v-for="item in cats" :key="item.ID" :label="item.Name" :value="item.ID">
                 </el-option>
               </el-select>
+            </el-form-item>
+            <el-form-item label="购入时间" prop="Buy">
+              <el-date-picker v-model="form.Buy" type="date" placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+            <el-form-item label="购入成本" prop="Cost">
+              <el-input-number v-model="form.Cost" :min="1"></el-input-number>
+            </el-form-item>
+            <el-form-item label="续费成本" prop="Renew">
+              <el-input-number v-model="form.Renew" :min="1"></el-input-number>
+            </el-form-item>
+            <el-form-item label="注册平台" prop="Registrar">
+              <el-input v-model="form.Registrar" placeholder="Godaddy"></el-input>
+            </el-form-item>
+            <el-form-item label="注册时间" prop="Create">
+              <el-date-picker v-model="form.Create" type="date" placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
+            <el-form-item label="到期时间" prop="Expire">
+              <el-date-picker v-model="form.Expire" type="date" placeholder="选择日期">
+              </el-date-picker>
             </el-form-item>
             <el-form-item>
               <el-alert title="请将米表域名cname到 parking.riluo.cn." type="success" :closable="false">
@@ -63,6 +114,7 @@
 
 <script>
 import axios from "axios";
+import chrono from "chrono-node";
 export default {
   data() {
     var confimDomain = (rule, value, callback) => {
@@ -81,7 +133,12 @@ export default {
         CatID: null,
         ID: 0,
         Domain: "",
-        Desc: ""
+        Desc: "",
+        Cost: null,
+        Renew: null,
+        Create: null,
+        Expire: null,
+        Registrar: ""
       },
       cats: [],
       catsTags: [],
@@ -130,6 +187,43 @@ export default {
       );
   },
   methods: {
+    domainFetch(e) {
+      function ISODateString(d) {
+        function pad(n) {
+          return n < 10 ? "0" + n : n;
+        }
+        return (
+          d.getUTCFullYear() +
+          "-" +
+          pad(d.getUTCMonth() + 1) +
+          "-" +
+          pad(d.getUTCDate()) +
+          "T" +
+          pad(d.getUTCHours()) +
+          ":" +
+          pad(d.getUTCMinutes()) +
+          ":" +
+          pad(d.getUTCSeconds()) +
+          "Z"
+        );
+      }
+
+      if (this.form.Domain.match(/^[a-zA-Z0-9-]{1,61}(?:\.[a-zA-Z]{2,})+$/g)) {
+        this.$http.get("whois/" + this.form.Domain).then(resp => {
+          if (resp.status == 200) {
+            let created = chrono.parseDate(resp.data.registrar.created_date);
+            if (created) {
+              this.form.Create = ISODateString(created);
+            }
+            let expired = chrono.parseDate(resp.data.registrar.expiration_date);
+            if (expired) {
+              this.form.Expire = ISODateString(expired);
+            }
+            this.form.Registrar = resp.data.registrar.registrar_name;
+          }
+        });
+      }
+    },
     filterTag(value, row) {
       return row.CatID === value;
     },
@@ -170,6 +264,12 @@ export default {
       this.form.Domain = row.Domain;
       this.form.Desc = row.Desc;
       this.form.CatID = row.CatID;
+      this.form.Expire = row.Expire;
+      this.form.Create = row.Create;
+      this.form.Buy = row.Buy;
+      this.form.Cost = row.Cost;
+      this.form.Renew = row.Renew;
+      this.form.Registrar = row.Registrar;
       this.activeTab = "edit";
     },
     reset() {
