@@ -6,6 +6,12 @@
     <el-form-item label="标题·英" prop="name_en">
       <el-input v-model="form.name_en" placeholder="Runcuo Domains Management"></el-input>
     </el-form-item>
+    <el-form-item label="米表主题" prop="theme">
+      <el-select v-model="form.theme" placeholder="请选择">
+        <el-option v-for="item in themes" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+    </el-form-item>
     <el-form-item label="域名" prop="domain">
       <el-input v-model="form.domain" placeholder="riluo.cn"></el-input>
     </el-form-item>
@@ -52,11 +58,7 @@ export default {
     var confimDomain = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入域名"));
-      } else if (
-        !value.match(
-          /^[a-zA-Z0-9-]{1,61}(?:\.[a-zA-Z]{2,})+$/g
-        )
-      ) {
+      } else if (!value.match(/^[a-zA-Z0-9-]{1,61}(?:\.[a-zA-Z]{2,})+$/g)) {
         callback(new Error("域名格式不规范"));
       } else {
         callback();
@@ -81,7 +83,9 @@ export default {
       }
     };
     return {
+      themes: [],
       form: {
+        theme: this.panel ? this.panel.Theme : "",
         id: this.panel ? this.panel.ID : "",
         name_cn: this.panel ? this.panel.Name : "",
         name_en: this.panel ? this.panel.NameEn : "",
@@ -101,6 +105,7 @@ export default {
           { required: true, message: "请输入英文米表名称" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符" }
         ],
+        theme: [{ required: true, message: "请选择主题" }],
         domain: [{ validator: confimDomain, required: true }],
         desc_cn: [
           { required: true, message: "请输入中文米表介绍" },
@@ -122,6 +127,13 @@ export default {
         logo_en: [{ validator: checkFile, required: !this.isEdit }]
       }
     };
+  },
+  mounted() {
+    this.$http.get("themes").then(resp => {
+      Object.keys(resp.data).forEach(item => {
+        this.themes.push({ label: resp.data[item], value: item });
+      });
+    });
   },
   methods: {
     onDelete() {
