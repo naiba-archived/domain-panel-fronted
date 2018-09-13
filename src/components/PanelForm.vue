@@ -33,7 +33,13 @@
     <el-form-item label="Logo·英" prop="logo_en">
       <el-input id="logo_en" type="file" accept="image/png" v-model="form.logo_en"></el-input>
     </el-form-item>
-    <el-form-item label="谷歌统计" prop="ga">
+    <el-form-item label="统计类型" prop="at">
+      <el-select v-model="form.at" placeholder="请选择">
+        <el-option v-for="item in ats" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="统计ID" prop="ga">
       <el-input v-model="form.ga" placeholder="XN-XXXXXXX"></el-input>
     </el-form-item>
     <el-form-item>
@@ -49,6 +55,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: {
     isEdit: Boolean,
@@ -83,7 +90,8 @@ export default {
       }
     };
     return {
-      themes: [],
+      themes: [], //主题列表
+      ats: [], //米表统计类型
       form: {
         theme: this.panel ? this.panel.Theme : "",
         id: this.panel ? this.panel.ID : "",
@@ -94,6 +102,7 @@ export default {
         desc_en: this.panel ? this.panel.DescEn : "",
         logo_cn: "",
         logo_en: "",
+        at: this.panel.AnalysisType,
         ga: this.panel ? this.panel.Analysis : ""
       },
       rules: {
@@ -129,11 +138,18 @@ export default {
     };
   },
   mounted() {
-    this.$http.get("themes").then(resp => {
-      Object.keys(resp.data).forEach(item => {
-        this.themes.push({ label: resp.data[item], value: item });
-      });
-    });
+    axios
+      .all([this.$http.get("themes"), this.$http.get("analysis_types")])
+      .then(
+        axios.spread((themes, analysis_types) => {
+          Object.keys(themes.data).forEach(item => {
+            this.themes.push({ label: themes.data[item], value: item });
+          });
+          Object.keys(analysis_types.data).forEach(item => {
+            this.ats.push({ label: analysis_types.data[item], value: item });
+          });
+        })
+      );
   },
   methods: {
     onDelete() {

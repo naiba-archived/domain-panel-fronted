@@ -98,7 +98,7 @@
               </el-date-picker>
             </el-form-item>
             <el-form-item>
-              <el-alert title="请将米表域名cname到 parking.riluo.cn." type="success" :closable="false">
+              <el-alert title="请将所有域名cname到 parking.riluo.cn." type="success" :closable="false">
               </el-alert>
             </el-form-item>
             <el-form-item>
