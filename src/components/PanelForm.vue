@@ -222,7 +222,7 @@ export default {
             .then(function(response) {
               nb.$message.success(msg + "成功！");
               nb.$store.commit("SET_PANEL", response.data);
-              nb.$router.push("/panel/" + response.data.ID);
+              nb.$router.push("/panel/" + response.data.ID + "/");
             })
             .catch(function(error) {
               console.log(error);

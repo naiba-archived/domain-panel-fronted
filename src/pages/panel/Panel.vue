@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    this.updateTitle()
+    this.updateTitle();
   }
 };
 </script>
