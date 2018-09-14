@@ -111,7 +111,7 @@
           <el-alert type="success" :closable="false" title="批量导入格式:" style="margin-bottom:15px">
             <template slot-scope="description">
               <p style="font-size:14px">
-                #分类中文,分类英文<br> 域名,购入成本（可留空）,续费成本（可留空）,中文简介（可留空）,英文简介（可留空）<br> #单字符,Single Char<br> qq.com,1000000,69,腾讯,Tencent<br> #双拼,Double Pinyin<br> taobao.com,1000000,69,淘宝,Alibaba
+                #分类中文,分类英文<br> 域名,购入成本（可留空）,购入时间（可留空）,续费成本（可留空）,简介（可留空）<br> #单字符,Single Char<br> qq.com,1000000,2005-01-01,69,腾讯网<br> #双拼,Double Pinyin<br> taobao.com,1000000,2006-01-01,69,淘宝网
               </p>
             </template>
           </el-alert>
@@ -149,44 +149,44 @@ export default {
         callback(new Error("请输入要导入的域名"));
       } else {
         var cat = null;
-        (this.batchParse = []),
-          value.split("\n").forEach((line, i) => {
-            if (i == 0 && !line.startsWith("#")) {
-              callback("第「" + i + "」行：必须以分类开头");
+        this.batchParse.Cats = [];
+        value.split("\n").forEach((line, i) => {
+          if (i == 0 && !line.startsWith("#")) {
+            callback("第「" + i + "」行：必须以分类开头");
+            return;
+          }
+          if (line.startsWith("#")) {
+            let catObj = line.substring(1).split(",");
+            if (catObj.length !== 2) {
+              callback("第「" + i + "」行：分类格式错误（#中文,英文）");
               return;
             }
-            if (line.startsWith("#")) {
-              let catObj = line.substring(1).split(",");
-              if (catObj.length !== 2) {
-                callback("第「" + i + "」行：分类格式错误（#中文,英文）");
-                return;
-              }
-              if (cat) {
-                this.batchParse.push(
-                  Object.assign({ Name: "", NameEn: "", Domains: [] }, cat)
-                );
-              }
-              cat = { Name: catObj[0], NameEn: catObj[1], Domains: [] };
-            } else {
-              let domainObj = line.split(",");
-              if (domainObj.length !== 5) {
-                callback(
-                  "第「" +
-                    i +
-                    "」行：域名格式错误「域名,购入成本（可留空）,续费成本（可留空）,中文简介（可留空）,英文简介（可留空）」"
-                );
-                return;
-              }
-              cat.Domains.push({
-                Domain: domainObj[0],
-                Cost: domainObj[1],
-                Renew: domainObj[2],
-                Desc: domainObj[3],
-                DescEn: domainObj[4]
-              });
+            if (cat) {
+              this.batchParse.Cats.push(
+                Object.assign({ Name: "", NameEn: "", Domains: [] }, cat)
+              );
             }
-          });
-        this.batchParse.push(cat);
+            cat = { Name: catObj[0], NameEn: catObj[1], Domains: [] };
+          } else {
+            let domainObj = line.split(",");
+            if (domainObj.length !== 5) {
+              callback(
+                "第「" +
+                  i +
+                  "」行：域名格式错误「域名,购入成本（可留空）,购入时间（可留空）,续费成本（可留空）,简介（可留空）」"
+              );
+              return;
+            }
+            cat.Domains.push({
+              Domain: domainObj[0],
+              Cost: parseInt(domainObj[1]),
+              Buy: chrono.parseDate(domainObj[2]),
+              Renew: parseInt(domainObj[3]),
+              Desc: domainObj[4]
+            });
+          }
+        });
+        this.batchParse.Cats.push(cat);
         callback();
       }
     };
@@ -194,7 +194,10 @@ export default {
       batch: {
         domainsText: ""
       },
-      batchParse: [],
+      batchParse: {
+        PanelID: parseInt(this.$route.params.id),
+        Cats: []
+      },
       batchRule: {
         domainsText: [{ validator: confimBatch, required: true }]
       },
@@ -350,35 +353,20 @@ export default {
       const nb = this;
       this.$refs.batch.validate(valid => {
         if (valid) {
-          console.log(this.batchParse);
-          return false;
-          var what = this.form.ID ? "修改域名" : "添加域名";
+          var what = "批量导入";
           const loading = this.$loading({
             lock: true,
             text: "正在" + what,
             spinner: "el-icon-loading",
             background: "rgba(255, 255, 255, 0.7)"
           });
-          (this.form.ID
-            ? this.$http.put("domain", this.form)
-            : this.$http.post("domain", this.form)
-          )
+          this.$http
+            .post("batch", this.batchParse)
             .then(function(response) {
-              nb.$message.success(what + "成功！");
-              if (nb.form.ID) {
-                var index = 0;
-                var domain = nb.domains.find(function(val, ind) {
-                  index = ind;
-                  return val.ID == response.data.ID;
-                });
-                if (domain) {
-                  nb.domains.splice(index, 1, response.data);
-                }
-              } else {
-                nb.domains.push(response.data);
-              }
-              nb.form.ID = 0;
-              nb.$refs.form.resetFields();
+              nb.$message.success(
+                what + "成功！共「" + response.data.length + "」条数据。"
+              );
+              nb.domains = nb.domains.concat(response.data);
               nb.activeTab = "list";
             })
             .catch(function(error) {
