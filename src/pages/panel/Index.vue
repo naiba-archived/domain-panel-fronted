@@ -107,6 +107,24 @@
             </el-form-item>
           </el-form>
         </el-tab-pane>
+        <el-tab-pane style="padding:10px" label="批量导入" name="batch">
+          <el-alert type="success" :closable="false" title="批量导入格式:" style="margin-bottom:15px">
+            <template slot-scope="description">
+              <p style="font-size:14px">
+                #分类中文,分类英文<br> 域名,购入成本（可留空）,续费成本（可留空）,中文简介（可留空）,英文简介（可留空）<br> #单字符,Single Char<br> qq.com,1000000,69,腾讯,Tencent<br> #双拼,Double Pinyin<br> taobao.com,1000000,69,淘宝,Alibaba
+              </p>
+            </template>
+          </el-alert>
+          <el-form :status-icon="true" ref="batch" :rules="batchRule" :model="batch">
+            <el-form-item prop="domainsText">
+              <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 30}" placeholder="" v-model="batch.domainsText">
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button @click="onBatch" type="primary">导入</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
       </el-tabs>
     </el-col>
   </el-row>
@@ -117,7 +135,7 @@ import axios from "axios";
 import chrono from "chrono-node";
 export default {
   data() {
-    var confimDomain = (rule, value, callback) => {
+    let confimDomain = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入域名"));
       } else if (!value.match(/^[a-zA-Z0-9-]{1,61}(?:\.[a-zA-Z]{2,})+$/g)) {
@@ -126,7 +144,60 @@ export default {
         callback();
       }
     };
+    let confimBatch = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入要导入的域名"));
+      } else {
+        var cat = null;
+        (this.batchParse = []),
+          value.split("\n").forEach((line, i) => {
+            if (i == 0 && !line.startsWith("#")) {
+              callback("第「" + i + "」行：必须以分类开头");
+              return;
+            }
+            if (line.startsWith("#")) {
+              let catObj = line.substring(1).split(",");
+              if (catObj.length !== 2) {
+                callback("第「" + i + "」行：分类格式错误（#中文,英文）");
+                return;
+              }
+              if (cat) {
+                this.batchParse.push(
+                  Object.assign({ Name: "", NameEn: "", Domains: [] }, cat)
+                );
+              }
+              cat = { Name: catObj[0], NameEn: catObj[1], Domains: [] };
+            } else {
+              let domainObj = line.split(",");
+              if (domainObj.length !== 5) {
+                callback(
+                  "第「" +
+                    i +
+                    "」行：域名格式错误「域名,购入成本（可留空）,续费成本（可留空）,中文简介（可留空）,英文简介（可留空）」"
+                );
+                return;
+              }
+              cat.Domains.push({
+                Domain: domainObj[0],
+                Cost: domainObj[1],
+                Renew: domainObj[2],
+                Desc: domainObj[3],
+                DescEn: domainObj[4]
+              });
+            }
+          });
+        this.batchParse.push(cat);
+        callback();
+      }
+    };
     return {
+      batch: {
+        domainsText: ""
+      },
+      batchParse: [],
+      batchRule: {
+        domainsText: [{ validator: confimBatch, required: true }]
+      },
       activeTab: "list",
       form: {
         PanelID: parseInt(this.$route.params.id),
@@ -274,6 +345,52 @@ export default {
     },
     reset() {
       this.$refs.form.resetFields();
+    },
+    onBatch() {
+      const nb = this;
+      this.$refs.batch.validate(valid => {
+        if (valid) {
+          console.log(this.batchParse);
+          return false;
+          var what = this.form.ID ? "修改域名" : "添加域名";
+          const loading = this.$loading({
+            lock: true,
+            text: "正在" + what,
+            spinner: "el-icon-loading",
+            background: "rgba(255, 255, 255, 0.7)"
+          });
+          (this.form.ID
+            ? this.$http.put("domain", this.form)
+            : this.$http.post("domain", this.form)
+          )
+            .then(function(response) {
+              nb.$message.success(what + "成功！");
+              if (nb.form.ID) {
+                var index = 0;
+                var domain = nb.domains.find(function(val, ind) {
+                  index = ind;
+                  return val.ID == response.data.ID;
+                });
+                if (domain) {
+                  nb.domains.splice(index, 1, response.data);
+                }
+              } else {
+                nb.domains.push(response.data);
+              }
+              nb.form.ID = 0;
+              nb.$refs.form.resetFields();
+              nb.activeTab = "list";
+            })
+            .catch(function(error) {
+              console.log(error);
+            })
+            .then(function() {
+              loading.close();
+            });
+        } else {
+          return false;
+        }
+      });
     },
     onSubmit() {
       const nb = this;
