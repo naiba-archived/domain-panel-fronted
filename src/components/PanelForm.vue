@@ -102,7 +102,7 @@ export default {
         desc_en: this.panel ? this.panel.DescEn : "",
         logo_cn: "",
         logo_en: "",
-        at: this.panel.AnalysisType,
+        at: this.panel ? this.panel.AnalysisType : null,
         ga: this.panel ? this.panel.Analysis : ""
       },
       rules: {
