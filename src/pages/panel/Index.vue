@@ -138,7 +138,7 @@ export default {
     let confimDomain = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入域名"));
-      } else if (!value.match(/^[a-zA-Z0-9-]{1,61}(?:\.[a-zA-Z]{2,})+$/g)) {
+      } else if (value.length < 4) {
         callback(new Error("域名格式不规范"));
       } else {
         callback();
