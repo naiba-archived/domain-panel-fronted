@@ -35,6 +35,17 @@
             <p @click="payInfoVisible = true" class="button">马上开始</p>
           </el-card>
         </el-col>
+        <el-col :sm="{span:20,offset:2}">
+          <p class="plain-title">合作伙伴</p>
+          <p>
+            <a class="friend-link" href="http://name.tg" title="域名特工" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nametg.png" alt="域名特工">
+            </a>
+            <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
+            </a>
+          </p>
+        </el-col>
       </el-row>
     </el-main>
     <el-dialog title="支付宝扫码付款" :visible.sync="payInfoVisible">
@@ -88,6 +99,19 @@ export default {
   }
   img {
     width: 50%;
+  }
+}
+.plain-title {
+  padding-top: 20px;
+  size: 25px;
+  font-weight: bolder;
+}
+.friend-link img {
+  margin: 20px;
+  border: #eeeeee 1px solid;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    margin-bottom: 0px;
   }
 }
 </style>
