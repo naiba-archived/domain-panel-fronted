@@ -44,9 +44,12 @@
             <a class="friend-link" href="https://www.ek.cm" title="易控域名监控" target="_black">
               <img width="200" height="53" src="https://www.ek.cm/wp-content/uploads/2018/09/cropped-logo.png.png" alt="易控域名监控">
             </a>
-            <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
-              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
+            <a class="friend-link" href="https://www.nazhumi.com/" title="哪煮米域名比价" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nazhumi.png" alt="哪煮米域名比价">
             </a>
+            <!-- <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
+            </a> -->
           </p>
         </el-col>
       </el-row>
