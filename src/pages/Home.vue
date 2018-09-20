@@ -41,6 +41,9 @@
             <a class="friend-link" href="http://name.tg" title="域名特工" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nametg.png" alt="域名特工">
             </a>
+            <a class="friend-link" href="http://www.ek.cm" title="易控域名监控" target="_black">
+              <img width="200" height="53" src="http://www.ek.cm/wp-content/uploads/2018/09/cropped-logo.png.png" alt="易控域名监控">
+            </a>
             <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
             </a>
