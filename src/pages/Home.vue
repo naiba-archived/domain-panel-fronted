@@ -40,7 +40,7 @@
             <span style="background-color:white;padding-left:10px;padding-right:10px">合作伙伴</span>
           </p>
           <hr style="z-index:-1;margin-top:-12px;height:1px;border:none;border-top:1px dashed #0066CC;">
-          <p>
+          <p style="text-align:center">
             <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
             </a>
