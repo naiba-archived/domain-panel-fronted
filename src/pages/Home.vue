@@ -36,7 +36,10 @@
           </el-card>
         </el-col>
         <el-col :sm="{span:20,offset:2}">
-          <p class="plain-title">合作伙伴</p>
+          <p class="plain-title" style="text-align:center;">
+            <span style="background-color:white;padding-left:10px;padding-right:10px">合作伙伴</span>
+          </p>
+          <hr style="z-index:-1;margin-top:-12px;height:1px;border:none;border-top:1px dashed #0066CC;">
           <p>
             <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
@@ -118,6 +121,7 @@ export default {
   @media (max-width: 768px) {
     margin-top: 10px;
     margin-bottom: 0px;
+    width: 37%;
   }
 }
 </style>
