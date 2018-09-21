@@ -38,6 +38,9 @@
         <el-col :sm="{span:20,offset:2}">
           <p class="plain-title">合作伙伴</p>
           <p>
+            <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
+            </a>
             <a class="friend-link" href="http://name.tg" title="域名特工" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nametg.png" alt="域名特工">
             </a>
@@ -47,9 +50,6 @@
             <a class="friend-link" href="https://www.nazhumi.com/" title="哪煮米域名比价" target="_black">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nazhumi.png" alt="哪煮米域名比价">
             </a>
-            <!-- <a class="friend-link" href="http://www.cg" title="草根域名" target="_black">
-              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/wwwcg.png" alt="草根域名">
-            </a> -->
           </p>
         </el-col>
       </el-row>
