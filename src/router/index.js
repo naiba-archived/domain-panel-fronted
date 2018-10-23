@@ -116,7 +116,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title && to.meta.title.length > 0) {
     document.title = to.meta.title + " - 日落资产管理 riluo.cn"
   } else {
-    document.title = "日落域名资产管理平台 riluo.cn"
+    document.title = "日落米表 riluo.cn"
   }
 
   if (to.matched.some(res => res.meta.requireLogin || res.meta.requireAdmin || res.meta.requireGuest)) {

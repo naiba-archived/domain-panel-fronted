@@ -1,43 +1,61 @@
 <template>
   <div>
-    <el-carousel class="main">
+    <el-carousel class="pmd" arrow="always">
       <el-carousel-item v-for="item in carousel_text" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
     <el-main>
-      <el-row :gutter="10" class="plan-cards">
-        <el-col :sm="{span:8,offset:4}">
-          <el-card class="plan-card" shadow="hover" header="月付计划">
-            <p>一个真正的投资者并不会如赌博般随意投放资金，他只会投放于有足够可能性获取利润的工具上。</p>
-            <div class="price">￥
-              <span class="value">10</span>
-              <span>每月</span>
-            </div>
-            <div class="promotion">
-              <span class="money">￥120</span>
-              <span class="discount">年付优惠</span>
-            </div>
-            <p @click="payInfoVisible = true" class="button">马上开始</p>
-          </el-card>
-        </el-col>
-        <el-col :sm="8">
-          <el-card class="plan-card plan-gold" shadow="hover" header="年付计划">
-            <p>人们习惯把短线进出股市的投机客称为投资人，就像大家把不断发生一夜情的骗子当成浪漫情人一样。</p>
-            <div class="price">￥
-              <span class="value">98</span>
-              <span>每年</span>
-            </div>
-            <div class="promotion">
-              <span class="money">￥120</span>
-              <span class="discount">年付优惠</span>
-            </div>
-            <p @click="payInfoVisible = true" class="button">马上开始</p>
-          </el-card>
-        </el-col>
+      <el-row>
         <el-col :sm="{span:20,offset:2}">
+          <el-row :gutter="20">
+            <el-col :sm="6">
+              <el-card class="card-body" :body-style="{ padding: '0px' }">
+                <img src="../../static/images/multi-theme.png" class="image">
+                <div>
+                  <span>米表多语言、多主题</span>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :sm="6">
+              <el-card class="card-body" :body-style="{ padding: '0px' }">
+                <img src="../../static/images/manage.png" class="image">
+                <div>
+                  <span>完善的管理系统</span>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :sm="6">
+              <el-card class="card-body" :body-style="{ padding: '0px' }">
+                <img src="../../static/images/https.png" class="image">
+                <div>
+                  <span>自动签发HTTPS</span>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :sm="6">
+              <el-card class="card-body" :body-style="{ padding: '0px' }">
+                <img height="160px" width="100%" src="../../static/images/parking.png" class="image">
+                <div>
+                  <span>专业域名停放</span>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :sm="{span:14,offset:5}" style="margin-top:20px;margin-bottom:20px">
+              <el-table :data="tableData">
+                <el-table-column prop="date" label="级别">
+                </el-table-column>
+                <el-table-column prop="name" label="黄金会员">
+                </el-table-column>
+                <el-table-column prop="address" label="超级会员">
+                </el-table-column>
+              </el-table>
+            </el-col>
+          </el-row>
           <p class="plain-title" style="text-align:center;">
-            <span style="background-color:white;padding-left:10px;padding-right:10px">合作伙伴</span>
+            <span style="background-color:white;padding-left:10px;padding-right:10px;">合作伙伴</span>
           </p>
           <hr style="z-index:-1;margin-top:-12px;height:1px;border:none;border-top:1px dashed #0066CC;">
           <p style="text-align:center">
@@ -50,24 +68,13 @@
             <a class="friend-link" href="https://www.ek.cm" title="易控域名监控" target="_black">
               <img width="200" height="53" src="https://www.ek.cm/wp-content/uploads/2018/09/cropped-logo.png.png" alt="易控域名监控">
             </a>
-            <a class="friend-link" href="https://www.nazhumi.com/" title="哪煮米域名比价" target="_black">
-              <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nazhumi.png" alt="哪煮米域名比价">
+            <a class="friend-link" href="https://www.idc.ee/" title="雄狮主机" target="_black">
+              <img width="200" height="53" src="https://hk.cdnassets.com/ui/resellerdata/480000_509999/494274/supersite2/supersite/themes/MinimalGreen-MyTheme/images/logo.gif" alt="哪煮米域名比价">
             </a>
           </p>
         </el-col>
       </el-row>
     </el-main>
-    <el-dialog title="支付宝扫码付款" :visible.sync="payInfoVisible">
-      <div class="payinfo">
-        <strong>转账备注填写注册邮箱</strong>
-        <br>
-        <br>
-        <img width="100%" src="../../static/images/pay.png">
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="payInfoVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -75,8 +82,39 @@
 export default {
   data() {
     return {
-      payInfoVisible: false,
-      carousel_text: ["专业域名停放", "省心资产管理", "高端投资交流"]
+      carousel_text: ["专业域名停放", "省心资产管理", "高端投资交流"],
+      tableData: [
+        {
+          date: "域名停放",
+          name: "❎",
+          address: "✅"
+        },
+        {
+          date: "米表HTTPS",
+          name: "❎",
+          address: "✅"
+        },
+        {
+          date: "域名数限制",
+          name: "100",
+          address: "1000"
+        },
+        {
+          date: "米表数",
+          name: "1",
+          address: "5"
+        },
+        {
+          date: "可用主题",
+          name: "一个默认",
+          address: "所有主题"
+        },
+        {
+          date: "价格",
+          name: "10 元/月",
+          address: "30 元/月"
+        }
+      ]
     };
   },
   methods: {}
@@ -84,7 +122,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.main {
+.pmd {
   background-color: #f6f9fc;
   text-align: center;
   .el-carousel__item {
@@ -100,20 +138,14 @@ export default {
     }
   }
 }
-.payinfo {
-  text-align: center;
-  strong {
-    font-size: 20px;
-    color: red;
-  }
-  img {
-    width: 50%;
-  }
+.card-body img {
+  height: 160px;
+  width: 100%;
 }
-.plain-title {
-  padding-top: 20px;
-  size: 25px;
-  font-weight: bolder;
+.card-body div {
+  background-color: #f6f9fc;
+  padding: 14px;
+  text-align: center;
 }
 .friend-link img {
   margin: 20px;
