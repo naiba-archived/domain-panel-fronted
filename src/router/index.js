@@ -114,9 +114,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // 页面标题
   if (to.meta.title && to.meta.title.length > 0) {
-    document.title = to.meta.title + " - 日落资产管理 riluo.cn"
+    document.title = to.meta.title + " - 日落米表托管 riluo.cn"
   } else {
-    document.title = "日落米表 riluo.cn"
+    document.title = "日落米表托管 riluo.cn"
   }
 
   if (to.matched.some(res => res.meta.requireLogin || res.meta.requireAdmin || res.meta.requireGuest)) {

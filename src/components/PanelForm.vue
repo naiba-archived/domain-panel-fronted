@@ -1,7 +1,7 @@
 <template>
   <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
     <el-form-item label="标题·中" prop="name_cn">
-      <el-input v-model="form.name_cn" placeholder="日落米表"></el-input>
+      <el-input v-model="form.name_cn" placeholder="日落米表托管"></el-input>
     </el-form-item>
     <el-form-item label="标题·英" prop="name_en">
       <el-input v-model="form.name_en" placeholder="Runcuo Domains Management"></el-input>
@@ -16,7 +16,7 @@
       <el-input v-model="form.domain" placeholder="riluo.cn"></el-input>
     </el-form-item>
     <el-form-item label="简介·中" prop="desc_cn">
-      <el-input type="textarea" :rows="3" v-model="form.desc_cn" placeholder="日落米表（riluo.cn）是由资深域名投资人奶爸创建，前身是09年上线的知名域名平台泡名网，后因业务整合，于2013年9月1号将泡名网业务全部转移到日落米表（riluo.cn）上。"></el-input>
+      <el-input type="textarea" :rows="3" v-model="form.desc_cn" placeholder="日落米表托管（riluo.cn）是由资深域名投资人奶爸创建，前身是09年上线的知名域名平台泡名网，后因业务整合，于2013年9月1号将泡名网业务全部转移到日落米表托管（riluo.cn）上。"></el-input>
     </el-form-item>
     <el-form-item label="简介·英" prop="desc_en">
       <el-input type="textarea" :rows="3" v-model="form.desc_en" placeholder="RiLuo.cn is created by a senior domain name investor, Naiba, who was formerly known as the well-known domain name platform in 2009. It will be bubble-named on September 1, 2013 due to business integration. All of the business was transferred to Runcheo's domain name asset management platform (riluo.cn)."></el-input>

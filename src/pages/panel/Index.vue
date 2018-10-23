@@ -68,7 +68,7 @@
               <el-input @blur="domainFetch" v-model="form.Domain" placeholder="RiLuo.cn"></el-input>
             </el-form-item>
             <el-form-item label="简介" prop="Desc">
-              <el-input v-model="form.Desc" placeholder="日落资产管理"></el-input>
+              <el-input v-model="form.Desc" placeholder="日落米表托管托管"></el-input>
             </el-form-item>
             <el-form-item label="分类" prop="CatID">
               <el-select v-model="form.CatID" placeholder="请选择">
