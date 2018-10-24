@@ -112,7 +112,7 @@ export default {
         ],
         name_en: [
           { required: true, message: "请输入英文米表名称" },
-          { min: 1, max: 20, message: "长度在 1 到 20 个字符" }
+          { min: 1, max: 40, message: "长度在 1 到 40 个字符" }
         ],
         theme: [{ required: true, message: "请选择主题" }],
         domain: [{ validator: confimDomain, required: true }],
@@ -128,8 +128,8 @@ export default {
           { required: true, message: "请输入英文米表介绍" },
           {
             min: 1,
-            max: 255,
-            message: "长度在 1 到 255 个字符"
+            max: 1000,
+            message: "长度在 1 到 1000 个字符"
           }
         ],
         logo_cn: [{ validator: checkFile, required: !this.isEdit }],
