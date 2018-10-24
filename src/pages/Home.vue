@@ -141,6 +141,9 @@ export default {
 .card-body img {
   height: 160px;
   width: 100%;
+  @media (max-width: 768px) {
+    height: 230px;
+  }
 }
 .card-body div {
   background-color: #f6f9fc;
@@ -154,6 +157,11 @@ export default {
     margin-top: 10px;
     margin-bottom: 0px;
     width: 37%;
+  }
+}
+@media (max-width: 768px) {
+  .card-body {
+    margin-bottom: 20px;
   }
 }
 </style>
