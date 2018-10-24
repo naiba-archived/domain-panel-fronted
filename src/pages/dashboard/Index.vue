@@ -1,7 +1,12 @@
 <template>
   <el-row>
     <el-col :sm="{span:20,offset:2}" style="padding:20px">
-      <el-alert :title="'会员服务到期日期：'+user.Expire" type="error" :closable="false"></el-alert>
+      <p>黄金会员到期：{{user.GoldVIPExpire}}
+        <el-button size="mini" type="success" plain @click="pay('gold')">续费会员</el-button>
+      </p>
+      <p>超级会员到期：{{user.SuperVIPExpire}}
+        <el-button size="mini" type="success" plain @click="pay('super')">续费会员</el-button>
+      </p>
     </el-col>
   </el-row>
 </template>
@@ -11,6 +16,11 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    }
+  },
+  methods: {
+    pay(what) {
+      window.open("/api/pay?vip=" + what+"&Authorization="+this.user.Token);
     }
   }
 };
