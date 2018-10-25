@@ -1,5 +1,5 @@
 <template>
-  <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
+  <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="100px">
     <el-form-item label="标题·中" prop="name_cn">
       <el-input v-model="form.name_cn" placeholder="日落米表托管"></el-input>
     </el-form-item>
@@ -9,6 +9,12 @@
     <el-form-item label="米表主题" prop="theme">
       <el-select v-model="form.theme" placeholder="请选择">
         <el-option v-for="item in themes" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="报价页主题" prop="offer_theme">
+      <el-select v-model="form.offer_theme" placeholder="请选择">
+        <el-option v-for="item in offer_themes" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
     </el-form-item>
@@ -91,9 +97,11 @@ export default {
     };
     return {
       themes: [], //主题列表
+      offer_themes: [], //报价页主题列表
       ats: [], //米表统计类型
       form: {
         theme: this.panel ? this.panel.Theme : "",
+        theme: this.panel ? this.panel.OfferTheme : "",
         id: this.panel ? this.panel.ID : "",
         name_cn: this.panel ? this.panel.Name : "",
         name_en: this.panel ? this.panel.NameEn : "",
@@ -115,6 +123,7 @@ export default {
           { min: 1, max: 40, message: "长度在 1 到 40 个字符" }
         ],
         theme: [{ required: true, message: "请选择主题" }],
+        offer_theme: [{ required: true, message: "请选择报价页主题" }],
         domain: [{ validator: confimDomain, required: true }],
         desc_cn: [
           { required: true, message: "请输入中文米表介绍" },
@@ -142,8 +151,14 @@ export default {
       .all([this.$http.get("themes"), this.$http.get("analysis_types")])
       .then(
         axios.spread((themes, analysis_types) => {
-          Object.keys(themes.data).forEach(item => {
-            this.themes.push({ label: themes.data[item], value: item });
+          Object.keys(themes.data.themes).forEach(item => {
+            this.themes.push({ label: themes.data.themes[item], value: item });
+          });
+          Object.keys(themes.data.offer_themes).forEach(item => {
+            this.offer_themes.push({
+              label: themes.data.offer_themes[item],
+              value: item
+            });
           });
           Object.keys(analysis_types.data).forEach(item => {
             this.ats.push({ label: analysis_types.data[item], value: item });
