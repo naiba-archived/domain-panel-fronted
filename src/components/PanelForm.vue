@@ -101,7 +101,7 @@ export default {
       ats: [], //米表统计类型
       form: {
         theme: this.panel ? this.panel.Theme : "",
-        theme: this.panel ? this.panel.OfferTheme : "",
+        offer_theme: this.panel ? this.panel.OfferTheme : "",
         id: this.panel ? this.panel.ID : "",
         name_cn: this.panel ? this.panel.Name : "",
         name_en: this.panel ? this.panel.NameEn : "",
