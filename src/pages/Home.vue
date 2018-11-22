@@ -106,13 +106,13 @@ export default {
         },
         {
           date: "可用主题",
-          name: "一个默认",
+          name: "官方默认",
           address: "所有主题"
         },
         {
           date: "价格",
-          name: "10 元/月",
-          address: "30 元/月"
+          name: "5 元/月",
+          address: "10 元/月"
         }
       ]
     };
