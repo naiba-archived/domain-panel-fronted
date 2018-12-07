@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :sm="{span:20,offset:2}" style="padding:20px">
+    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}" style="padding:20px">
       <el-tabs :value="activeTab" type="border-card" @tab-click="handleTabClick">
         <el-tab-pane label="分类列表" name="list">
           <el-table :stripe="true" :data="cats" :default-sort="{prop: 'index', order: 'descending'}">

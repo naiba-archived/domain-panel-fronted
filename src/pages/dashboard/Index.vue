@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :sm="{span:20,offset:2}" style="padding:20px">
+    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}" style="padding:20px">
       <p>黄金会员到期：{{user.GoldVIPExpire}}
         <el-button size="mini" type="success" plain @click="pay('gold')">续费会员</el-button>
       </p>

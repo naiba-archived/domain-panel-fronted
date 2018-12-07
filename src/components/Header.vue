@@ -1,6 +1,6 @@
 <template>
   <el-row class="header">
-    <el-col :sm="{span:20,offset:2}">
+    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}">
       <el-row>
         <el-col :span="15">
           <img @click="goto('/')" height="48px" src="https://www.riluo.cn/static/offical/images/logo.png">
