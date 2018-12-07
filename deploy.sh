@@ -1,5 +1,5 @@
 rm -rf dist &&\
     npm run build &&\
     cd dist &&\
-    ssh -t -p1987 root@web.sx.p4x.com 'rm -rf /home/www/runcuo/frontend/* && ls -al /home/www/runcuo/frontend/' &&\
-    rsync -rvz -e 'ssh -p 1987' --progress --remove-sent-files . root@web.sx.p4x.com:/home/www/runcuo/frontend/
+    ssh -t -p60030 root@ca.sx.p4x.com 'rm -rf /NAIBA/www/runcuo/frontend* && ls -al /NAIBA/www/runcuo/frontend' &&\
+    rsync -rvz -e 'ssh -p 60030' --progress --remove-sent-files . root@ca.sx.p4x.com:/NAIBA/www/runcuo/frontend
