@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}" style="padding:20px">
+    <el-col :sm="{span:20,offset:2}" style="padding:20px">
       <el-tabs value="list" type="border-card">
         <el-tab-pane label="报价列表" name="list">
           <el-table :stripe="true" :data="offers" :default-sort="{prop: 'CreatedAt', order: 'descending'}">

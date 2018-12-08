@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}" style="padding:20px">
+    <el-col :sm="{span:20,offset:2}" style="padding:20px">
       <el-form ref="form" :rules="rules" :model="form" label-width="80px">
         <el-form-item label="昵称" prop="Name">
           <el-input v-model="form.Name" placeholder="日落"></el-input>

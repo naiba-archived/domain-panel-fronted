@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="section" style="padding-top:0px;padding-bottom:0px">
-      <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}">
+      <el-col :sm="{span:20,offset:2}">
         <el-menu text-color="#444" :default-active="menuActiveIndex" background-color="#fff0" mode="horizontal" style="border:none" @select="handleSelect">
           <el-menu-item index="logo" disabled>
             <img style="max-width:192px;max-height:48px" :src="'/upload/logo/'+currentPanel.ID+'-logo.png'">

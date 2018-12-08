@@ -7,7 +7,7 @@
     </el-carousel>
     <el-main>
       <el-row>
-        <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}">
+        <el-col :sm="{span:20,offset:2}">
           <el-row :gutter="20">
             <el-col :sm="6">
               <el-card class="card-body" :body-style="{ padding: '0px' }">

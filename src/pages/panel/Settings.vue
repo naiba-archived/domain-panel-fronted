@@ -1,6 +1,6 @@
 <template>
   <el-row style="padding-top:20px">
-    <el-col :sm="{span:20,offset:2}" :xl="{span:8,offset:8}">
+    <el-col :sm="{span:20,offset:2}">
       <panel-form :is-edit="true" :panel="currentPanel"></panel-form>
     </el-col>
   </el-row>
