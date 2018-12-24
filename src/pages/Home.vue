@@ -65,8 +65,8 @@
             <a class="friend-link" href="http://name.tg" title="域名特工" target="_black" rel="nofollow">
               <img width="200" height="53" src="https://www.riluo.cn/static/offical/images/nametg.png" alt="域名特工">
             </a>
-            <a class="friend-link" href="https://www.ek.cm" title="易控域名监控" target="_black" rel="nofollow">
-              <img width="200" height="53" src="https://www.ek.cm/wp-content/uploads/2018/09/cropped-logo.png.png" alt="易控域名监控">
+            <a class="friend-link" href="https://5.nu" title="奶爸域名" target="_black">
+              <img width="200" height="53" src="https://www.riluo.cn/upload/logo/1-logo.png" alt="奶爸域名">
             </a>
             <a class="friend-link" href="https://www.idc.ee/" title="雄狮主机" target="_black" rel="nofollow">
               <img width="200" height="53" src="https://hk.cdnassets.com/ui/resellerdata/480000_509999/494274/supersite2/supersite/themes/MinimalGreen-MyTheme/images/logo.gif" alt="哪煮米域名比价">
