@@ -136,7 +136,7 @@
             </a>
             <a
               class="friend-link"
-              href="https://5.nu"
+              href="https://mi.riluo.cn"
               title="奶爸域名"
               target="_black"
             >
