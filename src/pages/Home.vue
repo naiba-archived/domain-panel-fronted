@@ -214,13 +214,21 @@ export default {
     };
   },
   mounted() {
+    if (this.$store.state.user) {
+      //初始化米表列表
+      this.$http.get("panels").then(function(resp) {
+        this.$store.commit("INIT_PANELS", resp.data);
+      });
+    }
     var code = this.getParameterByName("code");
     var state = this.getParameterByName("state");
-    if (code && state) {
+    if (code && state && !this.$store.state.user) {
       this.logining = true;
       this.$http
         .get(
-          "https://"+document.location.host+"/hack/oauth2-callback?code=" +
+          "https://" +
+            document.location.host +
+            "/hack/oauth2-callback?code=" +
             code +
             "&state=" +
             state
@@ -228,6 +236,7 @@ export default {
         .then(res => {
           this.$message.success("登录成功！");
           this.$store.commit("SET_USER", res.data);
+          window.location.href = "/";
         })
         .catch(() => {
           this.logining = false;
