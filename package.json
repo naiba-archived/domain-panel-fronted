@@ -25,7 +25,6 @@
     "vue": "^2.0.0",
     "vue-analytics": "^5.16.0",
     "vue-hot-reload-api": "^2.3.0",
-    "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
     "vuex": "^2.0.0 || ^3.0.0",
     "vuex-persistedstate": "^2.5.4"

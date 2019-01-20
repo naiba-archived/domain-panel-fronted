@@ -101,6 +101,14 @@ export default {
       return this.$store.state.panels;
     }
   },
+  mounted() {
+    if (this.user) {
+      //初始化米表列表
+      this.$http.get("panels").then(function(resp) {
+        this.$store.commit("INIT_PANELS", resp.data);
+      });
+    }
+  },
   methods: {
     oauth2Login() {
       window.location.href = "/hack/oauth2-login";

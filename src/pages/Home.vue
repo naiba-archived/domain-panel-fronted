@@ -214,12 +214,6 @@ export default {
     };
   },
   mounted() {
-    if (this.$store.state.user) {
-      //初始化米表列表
-      this.$http.get("panels").then(function(resp) {
-        this.$store.commit("INIT_PANELS", resp.data);
-      });
-    }
     var code = this.getParameterByName("code");
     var state = this.getParameterByName("state");
     if (code && state && !this.$store.state.user) {
