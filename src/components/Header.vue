@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     oauth2Login() {
-      window.location.href = "http://localhost:8080/hack/oauth2-login";
+      window.location.href = "/hack/oauth2-login";
     },
     goto(dist) {
       this.$router.push(dist);
