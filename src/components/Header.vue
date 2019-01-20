@@ -30,8 +30,8 @@
               <img
                 width="25px"
                 style="margin-bottom:-4px"
-                :src="'https://robohash.org/'+user.Mail+'.png?set=set2'"
-              > {{user.Name?user.Name:"未命名"}}
+                :src="'https://tv.sb/upload/avatar/'+{{user.UcenterID}}"
+              > {{user.UcenterExtra?user.UcenterExtra:"未命名"}}
             </span>
             <el-dropdown-menu
               slot="dropdown"
@@ -111,7 +111,7 @@ export default {
     logout() {
       this.$store.clear;
       this.$store.commit("CLEAR");
-      this.$router.push("/login");
+      this.$router.push("/");
     }
   }
 };

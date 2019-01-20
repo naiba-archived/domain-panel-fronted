@@ -17,7 +17,7 @@ Axios.interceptors.request.use(
         // 用户未登录，跳转登录页
         if (router.currentRoute.meta.requireLogin && !store.state.user) {
             router.push({
-                path: "/login"
+                path: "/"
             });
         }
 

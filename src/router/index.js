@@ -5,7 +5,6 @@ import { Message } from "element-ui"
 import store from "../store"
 
 import Home from '../pages/Home.vue'
-import Login from '../pages/Login.vue'
 //Dashboard
 import Dashboard from '../pages/dashboard/Dashboard.vue'
 import DashIndex from '../pages/dashboard/Index.vue'
