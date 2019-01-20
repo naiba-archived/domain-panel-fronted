@@ -104,7 +104,7 @@ export default {
   mounted() {
     if (this.user) {
       //初始化米表列表
-      this.$http.get("panels").then(function(resp) {
+      this.$http.get("panels").then(resp => {
         this.$store.commit("INIT_PANELS", resp.data);
       });
     }
