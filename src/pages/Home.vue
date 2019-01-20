@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    v-loading="logining"
+    element-loading-text="正在登录"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <el-carousel
       class="pmd"
       arrow="always"
@@ -173,6 +178,7 @@ export default {
   data() {
     return {
       carousel_text: ["专业域名停放", "省心资产管理", "高端投资交流"],
+      logining: false,
       tableData: [
         {
           date: "域名停放",
@@ -207,7 +213,38 @@ export default {
       ]
     };
   },
-  methods: {}
+  mounted() {
+    var code = this.getParameterByName("code");
+    var state = this.getParameterByName("state");
+    if (code && state) {
+      this.logining = true;
+      this.$http
+        .get(
+          "https://"+document.location.host+"/hack/oauth2-callback?code=" +
+            code +
+            "&state=" +
+            state
+        )
+        .then(res => {
+          this.$message.success("登录成功！");
+          this.$store.commit("SET_USER", res.data);
+        })
+        .catch(() => {
+          this.logining = false;
+        });
+    }
+  },
+  methods: {
+    getParameterByName: function(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+  }
 };
 </script>
 

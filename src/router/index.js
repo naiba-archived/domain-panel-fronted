@@ -33,14 +33,6 @@ const router = new Router({
       ]
     },
     {
-      path: '/login',
-      component: Login,
-      meta: {
-        requireGuest: true,
-        title: "平台登录",
-      },
-    },
-    {
       path: '/dashboard',
       component: Dashboard,
       children: [
@@ -142,7 +134,7 @@ router.beforeEach((to, from, next) => {
       // 没登录且需要登录
       Message.error("需要登录")
       next({
-        path: "/login?r=" + encodeURIComponent(document.URL)
+        path: "/"
       });
       return
     }

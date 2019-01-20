@@ -55,7 +55,7 @@ Axios.interceptors.response.use(
             store.commit('CLEAR')
             // 若是接口访问的时候没有发现有鉴权的基础信息,直接返回登录页
             router.push({
-                path: "/login"
+                path: "/"
             });
         } else {
             // 下面是接口回调的satus ,因为我做了一些错误页面,所以都会指向对应的报错页面
