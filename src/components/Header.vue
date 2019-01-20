@@ -30,7 +30,7 @@
               <img
                 width="25px"
                 style="margin-bottom:-4px"
-                :src="'https://tv.sb/upload/avatar/'+{{user.UcenterID}}"
+                :src="'https://tv.sb/upload/avatar/'+user.UcenterID"
               > {{user.UcenterExtra?user.UcenterExtra:"未命名"}}
             </span>
             <el-dropdown-menu
