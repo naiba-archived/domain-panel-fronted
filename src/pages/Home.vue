@@ -1,9 +1,4 @@
 <template>
-  <el-alert
-    title="登录服务正在重构升级，暂时无法登陆。本服务也即将改版。"
-    type="warning"
-  >
-  </el-alert>
   <div
     v-loading="logining"
     element-loading-text="正在登录"
