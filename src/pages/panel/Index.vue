@@ -1,9 +1,24 @@
 <template>
   <el-row>
-    <el-col :sm="{span:20,offset:2}" style="padding:20px">
-      <el-tabs :value="activeTab" type="border-card" @tab-click="handleTabClick">
-        <el-tab-pane label="域名列表" name="list">
-          <el-table :stripe="true" :data="domains" :default-sort="{prop: 'cat', order: 'descending'}" show-summary>
+    <el-col
+      :sm="{span:20,offset:2}"
+      style="padding:20px"
+    >
+      <el-tabs
+        :value="activeTab"
+        type="border-card"
+        @tab-click="handleTabClick"
+      >
+        <el-tab-pane
+          label="域名列表"
+          name="list"
+        >
+          <el-table
+            :stripe="true"
+            :data="domains"
+            :default-sort="{prop: 'cat', order: 'descending'}"
+            show-summary
+          >
             <el-table-column label="#">
               <template slot-scope="scope">
                 {{ scope.row.ID }}
@@ -14,114 +29,264 @@
                 {{ scope.row.Domain }}
               </template>
             </el-table-column>
-            <el-table-column label="分类" :filters="catsTags" :filter-method="filterTag" filter-placement="bottom-end">
+            <el-table-column
+              label="分类"
+              :filters="catsTags"
+              :filter-method="filterTag"
+              filter-placement="bottom-end"
+            >
               <template slot-scope="scope">
-                <el-tag :type="scope.$index % 2 == 0 ? 'primary' : 'success'" disable-transitions>{{cat(scope.row.CatID,'Name')}}</el-tag>
+                <el-tag
+                  :type="scope.$index % 2 == 0 ? 'primary' : 'success'"
+                  disable-transitions
+                >{{cat(scope.row.CatID,'Name')}}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="到期时间" width="180" prop="Expire" sortable>
+            <el-table-column
+              label="到期时间"
+              width="180"
+              prop="Expire"
+              sortable
+            >
               <template slot-scope="scope">
                 {{ scope.row.Expire }}
               </template>
             </el-table-column>
-            <el-table-column label="简介" width="180">
+            <el-table-column
+              label="简介"
+              width="180"
+            >
               <template slot-scope="scope">
                 {{ scope.row.Desc }}
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="170">
+            <el-table-column
+              label="操作"
+              width="170"
+            >
               <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                <el-button
+                  size="mini"
+                  @click="handleEdit(scope.$index, scope.row)"
+                >编辑</el-button>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleDelete(scope.$index, scope.row)"
+                >删除</el-button>
               </template>
             </el-table-column>
-            <el-table-column label="续费成本" prop="Renew">
+            <el-table-column
+              label="续费成本"
+              prop="Renew"
+            >
               <template slot-scope="scope">
                 {{ scope.row.Renew }}
               </template>
             </el-table-column>
-            <el-table-column label="购入成本" prop="Cost">
+            <el-table-column
+              label="购入成本"
+              prop="Cost"
+            >
               <template slot-scope="scope">
                 {{ scope.row.Cost }}
               </template>
             </el-table-column>
-            <el-table-column label="注册商" width="200">
+            <el-table-column
+              label="注册商"
+              width="200"
+            >
               <template slot-scope="scope">
                 {{ scope.row.Registrar }}
               </template>
             </el-table-column>
-            <el-table-column label="注册时间" width="180" prop="Create" sortable>
+            <el-table-column
+              label="注册时间"
+              width="180"
+              prop="Create"
+              sortable
+            >
               <template slot-scope="scope">
                 {{ scope.row.Create }}
               </template>
             </el-table-column>
-            <el-table-column label="购入时间" width="180" prop="Buy" sortable>
+            <el-table-column
+              label="购入时间"
+              width="180"
+              prop="Buy"
+              sortable
+            >
               <template slot-scope="scope">
                 {{ scope.row.Buy }}
               </template>
             </el-table-column>
           </el-table>
         </el-tab-pane>
-        <el-tab-pane :label="form.ID?'修改域名':'添加域名'" name="edit">
-          <el-form :status-icon="true" ref="form" :rules="rules" :model="form" label-width="80px">
-            <el-form-item label="域名" prop="Domain">
-              <el-input @blur="domainFetch" v-model="form.Domain" placeholder="RiLuo.cn"></el-input>
+        <el-tab-pane
+          :label="form.ID?'修改域名':'添加域名'"
+          name="edit"
+        >
+          <el-form
+            :status-icon="true"
+            ref="form"
+            :rules="rules"
+            :model="form"
+            label-width="80px"
+          >
+            <el-form-item
+              label="域名"
+              prop="Domain"
+            >
+              <el-input
+                @blur="domainFetch"
+                v-model="form.Domain"
+                placeholder="RiLuo.cn"
+              ></el-input>
             </el-form-item>
-            <el-form-item label="简介" prop="Desc">
-              <el-input v-model="form.Desc" placeholder="日落米表托管托管"></el-input>
+            <el-form-item
+              label="简介"
+              prop="Desc"
+            >
+              <el-input
+                v-model="form.Desc"
+                placeholder="日落米表托管托管"
+              ></el-input>
             </el-form-item>
-            <el-form-item label="分类" prop="CatID">
-              <el-select v-model="form.CatID" placeholder="请选择">
-                <el-option v-for="item in cats" :key="item.ID" :label="item.Name" :value="item.ID">
+            <el-form-item
+              label="分类"
+              prop="CatID"
+            >
+              <el-select
+                v-model="form.CatID"
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in cats"
+                  :key="item.ID"
+                  :label="item.Name"
+                  :value="item.ID"
+                >
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="购入时间" prop="Buy">
-              <el-date-picker v-model="form.Buy" type="date" placeholder="选择日期">
+            <el-form-item
+              label="购入时间"
+              prop="Buy"
+            >
+              <el-date-picker
+                v-model="form.Buy"
+                type="date"
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="购入成本" prop="Cost">
-              <el-input-number v-model="form.Cost" :min="1"></el-input-number>
+            <el-form-item
+              label="购入成本"
+              prop="Cost"
+            >
+              <el-input-number
+                v-model="form.Cost"
+                :min="1"
+              ></el-input-number>
             </el-form-item>
-            <el-form-item label="续费成本" prop="Renew">
-              <el-input-number v-model="form.Renew" :min="1"></el-input-number>
+            <el-form-item
+              label="续费成本"
+              prop="Renew"
+            >
+              <el-input-number
+                v-model="form.Renew"
+                :min="1"
+              ></el-input-number>
             </el-form-item>
-            <el-form-item label="注册平台" prop="Registrar">
-              <el-input v-model="form.Registrar" placeholder="Godaddy"></el-input>
+            <el-form-item
+              label="注册平台"
+              prop="Registrar"
+            >
+              <el-input
+                v-model="form.Registrar"
+                placeholder="Godaddy"
+              ></el-input>
             </el-form-item>
-            <el-form-item label="注册时间" prop="Create">
-              <el-date-picker v-model="form.Create" type="date" placeholder="选择日期">
+            <el-form-item
+              label="注册时间"
+              prop="Create"
+            >
+              <el-date-picker
+                v-model="form.Create"
+                type="date"
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="到期时间" prop="Expire">
-              <el-date-picker v-model="form.Expire" type="date" placeholder="选择日期">
+            <el-form-item
+              label="到期时间"
+              prop="Expire"
+            >
+              <el-date-picker
+                v-model="form.Expire"
+                type="date"
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </el-form-item>
             <el-form-item>
-              <el-alert title="请将所有域名cname到 parking.riluo.cn." type="success" :closable="false">
+              <el-alert
+                title="请将所有域名cname到 parking.riluo.cn."
+                type="success"
+                :closable="false"
+              >
               </el-alert>
             </el-form-item>
             <el-form-item>
-              <el-button @click="onSubmit" type="primary">{{form.ID?"修改":"添加"}}</el-button>
+              <el-button
+                @click="onSubmit"
+                type="primary"
+              >{{form.ID?"修改":"添加"}}</el-button>
               <el-button @click="reset">重置</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane style="padding:10px" label="批量导入" name="batch">
-          <el-alert type="success" :closable="false" title="批量导入格式:" style="margin-bottom:15px">
+        <el-tab-pane
+          style="padding:10px"
+          label="批量导入导出"
+          name="batch"
+        >
+          <el-alert
+            type="success"
+            :closable="false"
+            title="批量导入格式:"
+            style="margin-bottom:15px"
+          >
             <template slot-scope="description">
               <p style="font-size:14px">
                 #分类中文,分类英文<br> 域名,购入成本（可留空）,购入时间（可留空）,续费成本（可留空）,简介（可留空）<br> #单字符,Single Char<br> qq.com,1000000,2005-01-01,69,腾讯网<br> #双拼,Double Pinyin<br> taobao.com,1000000,2006-01-01,69,淘宝网
               </p>
             </template>
           </el-alert>
-          <el-form :status-icon="true" ref="batch" :rules="batchRule" :model="batch">
+          <el-form
+            :status-icon="true"
+            ref="batch"
+            :rules="batchRule"
+            :model="batch"
+          >
             <el-form-item prop="domainsText">
-              <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 30}" placeholder="" v-model="batch.domainsText">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 10, maxRows: 30}"
+                placeholder=""
+                v-model="batch.domainsText"
+              >
               </el-input>
             </el-form-item>
             <el-form-item>
-              <el-button @click="onBatch" type="primary">导入</el-button>
+              <el-button
+                @click="onBatch"
+                type="primary"
+              >导入</el-button>
+              <el-button
+                @click="onExport"
+                type="info"
+              >导出</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -348,6 +513,14 @@ export default {
     },
     reset() {
       this.$refs.form.resetFields();
+    },
+    onExport() {
+      window.open(
+        "/api/panel/" +
+          this.$route.params.id +
+          "/export?Authorization=" +
+          this.$store.state.user.Token
+      );
     },
     onBatch() {
       const nb = this;
